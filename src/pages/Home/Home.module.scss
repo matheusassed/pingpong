@@ -1,0 +1,12 @@
+.navegacao{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1em;
+  margin-top: 3em;
+
+  .link{
+    font-size: 2em;
+  }
+}
