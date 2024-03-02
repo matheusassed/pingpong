@@ -1,5 +1,8 @@
 $white: #F2EFEB;
 $blue: #1C3640;
+$lightBlue: #65858C;
+$red: #BF1F1F;
+$lightRed: #F2A391;
 
 .novaPartida{
   display: flex;
@@ -24,6 +27,7 @@ $blue: #1C3640;
     border: 2px solid $white;
     background-color: $blue;
     width: 100%;
+    position: relative;
 
     .areaJogador{
       display: flex;
@@ -49,6 +53,8 @@ $blue: #1C3640;
 
         span{
           font-size: 4em;
+          -webkit-user-select: none;
+          user-select: none;
         }
       }
 
@@ -66,7 +72,36 @@ $blue: #1C3640;
         font-size: 6em;
         line-height: 1em;
         cursor: pointer;
+        -webkit-user-select: none;
+        user-select: none;
+
+        &:first-child{
+          color: $lightBlue;
+        }
+        &:last-child{
+          color: $lightRed;
+        }
       }
+    }
+
+    .enviar{
+      position: absolute;
+      width: 85px;
+      height: 85px;
+      border-radius: 50%;
+      background-color: $red;
+      color: $white;
+      font-size: 1em;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-bottom: 4px;
+      cursor: pointer;
+      -webkit-user-select: none;
+      user-select: none;
     }
   }
 }
