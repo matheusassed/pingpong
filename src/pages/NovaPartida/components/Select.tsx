@@ -37,15 +37,25 @@ const Select = (props:SelectProps) => {
       onCreateOption={tratarCriacao}
       options={props.lista}
       value={props.valor}
+      menuPlacement="auto"
       unstyled
       placeholder='Selecione o Jogador'
+      minMenuHeight={690}
+      maxMenuHeight={800}
       styles={{
         control: (baseStyles, state) => ({
           ...baseStyles,
-          borderColor: state.isFocused ? 'grey' : 'red',
           width: '100%',
           maxWidth: '100%',
-          position: 'relative'
+          position: 'relative',
+          backgroundColor: state.isFocused ? '#1C3640' : 'transparent',
+          borderRadius: '8px'
+        }),
+        menu: (baseStyles) => ({
+          ...baseStyles,
+          backgroundColor: '#1C3640',
+          fontSize: '1.8em',
+          borderRadius: '8px'
         }),
         input: (baseStyles) => ({
           ...baseStyles,
@@ -53,11 +63,13 @@ const Select = (props:SelectProps) => {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
+          fontSize: '1.8em',
           input: {
             textAlign: 'center',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
+            fontSize: '1.8em',
           },
           '::after': {
             gridArea: '0',
@@ -75,6 +87,20 @@ const Select = (props:SelectProps) => {
         dropdownIndicator: (baseStyles) => ({
           ...baseStyles,
           display: 'none'
+        }),
+        placeholder: (baseStyles) => ({
+          ...baseStyles,
+          fontSize: '1.8em'
+        }),
+        option: (baseStyles) => ({
+          ...baseStyles,
+          ':hover': {
+            color: '#F2A391'
+          }
+        }),
+        singleValue: (baseStyles) => ({
+          ...baseStyles,
+          fontSize: '1.8em'
         }),
       }}
     />
