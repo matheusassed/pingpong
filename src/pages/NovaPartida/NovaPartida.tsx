@@ -1,44 +1,22 @@
 import { useEffect, useState } from 'react'
 import styles from './NovaPartida.module.scss'
-import { listaUsuarios, salvarJogador } from '../../service/service'
+import { listaUsuarios } from '../../service/service'
 import { Jogador, Opcao } from '../../types'
-import CreatableSelect from 'react-select/creatable'
-
-const criarOpcao = (label: string) => ({
-  label,
-  value: label.toLowerCase().replace(/\W/g, ''),
-})
+import Select from './components/Select'
 
 const NovaPartida = () => {
-  const [listaJogadoresCadastrados, setListaJogadoresCadastrados] = useState<Opcao[]>([])
-  const [carregando, setCarregando] = useState<boolean>(false)
-
-  const [jogador1, setJogador1] = useState<Opcao | null>()
-  const [jogador2, setJogador2] = useState<Opcao | null>()
+  const [listaJogadoresCadastrados, setListaJogadoresCadastrados] = useState<Opcao[] | undefined>()
+  const [jogador1, setJogador1] = useState<Jogador>()
+  const [jogador2, setJogador2] = useState<Jogador>()
 
   const buscaListaDeJogadoresCadastrados = async () => {
     const retorno = await listaUsuarios()
-    const retornoAjustadoParaSelect:Opcao[] = retorno.map((jogador:Jogador) => ({
-      label: jogador.nome,
-      value: jogador.nome.toLowerCase().replace(/\W/g, '')
+    const retornoAjustadoParaSelect:Opcao[] | undefined = retorno?.map((jogador:Jogador) => ({
+      label: jogador.name,
+      value: jogador.name.toLowerCase().replace(/\W/g, '')
     }))
     setListaJogadoresCadastrados(retornoAjustadoParaSelect)
   }
-
-  const salvaNovoJogador = async (informacoesJogador:Opcao) => {
-    await salvarJogador(informacoesJogador.label) 
-  }
-
-  const tratarCriacao = (valorInput: string) => {
-    setCarregando(true)
-    
-    const novaOpcao = criarOpcao(valorInput)
-    setListaJogadoresCadastrados((prev) => [...prev, novaOpcao])
-    setCarregando(false)
-
-    setJogador1(novaOpcao)
-    salvaNovoJogador(novaOpcao)
-  };
 
   useEffect(() => {
     buscaListaDeJogadoresCadastrados()
@@ -49,16 +27,13 @@ const NovaPartida = () => {
       <div className={ styles.nomeJogador }>
         {
           !!listaJogadoresCadastrados && !!listaJogadoresCadastrados.length &&
-          <CreatableSelect
-            isClearable
-            isDisabled={carregando}
-            isLoading={carregando}
-            onChange={(novoValor) => setJogador1(novoValor)}
-            onCreateOption={tratarCriacao}
-            options={listaJogadoresCadastrados}
-            value={jogador1}
+          <Select 
+            lista={listaJogadoresCadastrados}
+            setLista={((a:Opcao[])=>setListaJogadoresCadastrados(a))}
+            valor={jogador1}
+            atualizaValor={(a:Jogador) => setJogador1(a)}
           />
-        }
+        } 
       </div>
       
       <div className={ styles.mesa }>
@@ -85,14 +60,11 @@ const NovaPartida = () => {
       <div className={ styles.nomeJogador }>
         {
           !!listaJogadoresCadastrados && !!listaJogadoresCadastrados.length &&
-          <CreatableSelect
-            isClearable
-            isDisabled={carregando}
-            isLoading={carregando}
-            onChange={(novoValor) => setJogador2(novoValor)}
-            onCreateOption={tratarCriacao}
-            options={listaJogadoresCadastrados}
-            value={jogador2}
+          <Select 
+            lista={listaJogadoresCadastrados}
+            setLista={((a:Opcao[])=>setListaJogadoresCadastrados(a))}
+            valor={jogador2}
+            atualizaValor={(a:Jogador) => setJogador2(a)}
           />
         }
       </div>
