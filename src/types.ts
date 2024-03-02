@@ -1,5 +1,5 @@
 export interface Jogador{
-  nome: string;
+  name: string;
 }
 
 export interface Opcao {

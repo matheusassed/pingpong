@@ -4,20 +4,12 @@ const supabaseKey:string = import.meta.env.VITE_SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
 export const listaUsuarios = async () => {
-  return [
-    {
-      id: 1,
-      nome: 'matheus'
-    },
-    {
-      id: 2,
-      nome: 'diogo'
-    },
-    {
-      id: 3,
-      nome: 'alex'
-    }
-  ]
+  const { data: players, error } = await supabase
+  .from('players')
+  .select('name')
+
+  console.log(error)
+  return players
 }
 
 export const salvarJogador = async (nome:string) => {
