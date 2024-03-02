@@ -39,6 +39,44 @@ const Select = (props:SelectProps) => {
       value={props.valor}
       unstyled
       placeholder='Selecione o Jogador'
+      styles={{
+        control: (baseStyles, state) => ({
+          ...baseStyles,
+          borderColor: state.isFocused ? 'grey' : 'red',
+          width: '100%',
+          maxWidth: '100%',
+          position: 'relative'
+        }),
+        input: (baseStyles) => ({
+          ...baseStyles,
+          textAlign: 'center',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          input: {
+            textAlign: 'center',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          },
+          '::after': {
+            gridArea: '0',
+            minWidth: 0,
+            width: 0
+          }
+        }),
+        indicatorsContainer: (baseStyles) => ({
+          ...baseStyles,
+          position: 'absolute',
+          top: '50%',
+          right: '0',
+          transform: 'translateY(-50%)'
+        }),
+        dropdownIndicator: (baseStyles) => ({
+          ...baseStyles,
+          display: 'none'
+        }),
+      }}
     />
   )
 
