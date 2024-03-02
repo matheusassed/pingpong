@@ -1,0 +1,70 @@
+$white: #F2EFEB;
+$blue: #1C3640;
+
+.novaPartida{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  flex-grow: 1;
+
+  .nomeJogador{
+    display: block;
+  }
+
+  .mesa{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 8px;
+    border: 2px solid $white;
+    background-color: $blue;
+    width: 100%;
+
+    .areaJogador{
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      flex-grow: 1;
+      
+      &:first-child{
+        border-bottom: 1px solid $white;
+      }
+      
+      &:last-child{
+        border-top: 1px solid $white;
+      }
+
+      .areaPontuacao{
+        display: flex;
+        flex-grow: 1;
+        border-right: 1px solid $white;
+        justify-content: center;
+        align-items: center;
+        width: 50%;
+
+        span{
+          font-size: 4em;
+        }
+      }
+
+      .controles{
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        justify-content: space-between;
+        align-items: center;
+        width: 50%;
+      }
+
+      .controle{
+        flex-grow: 1;
+        font-size: 6em;
+        line-height: 1em;
+        cursor: pointer;
+      }
+    }
+  }
+}

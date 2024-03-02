@@ -14,7 +14,7 @@ function App() {
   return (
     <BrowserRouter>
       <header>
-        <Link to='/'><h1>Registro de Partidas de Pingpong</h1></Link>
+        <Link to='/'><h1>Controle do Ping</h1></Link>
       </header>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -23,7 +23,6 @@ function App() {
           <Route path="/estatisticas" element={<Estatisticas />} />
         </Routes>
     </BrowserRouter>
-
   )
 }
 
