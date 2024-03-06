@@ -1,28 +1,34 @@
 import { useEffect, useState } from 'react'
 import styles from './NovaPartida.module.scss'
 import { listaUsuarios, registrarPartida } from '../../service/service'
-import { Jogador, Opcao } from '../../types'
+import { Jogador } from '../../types'
 import Select from './components/Select'
 
 const NovaPartida = () => {
-  const [listaJogadoresCadastrados, setListaJogadoresCadastrados] = useState<Opcao[] | undefined>()
+  const [listaJogadoresCadastrados, setListaJogadoresCadastrados] = useState<Jogador[]>()
   const [jogador1, setJogador1] = useState<Jogador>()
   const [jogador2, setJogador2] = useState<Jogador>()
   const [pontuacaoJogador1, setPontuacaoJogador1] = useState<number>(0)
   const [pontuacaoJogador2, setPontuacaoJogador2] = useState<number>(0)
 
   const buscaListaDeJogadoresCadastrados = async () => {
-    const retorno = await listaUsuarios()
-    const retornoAjustadoParaSelect:Opcao[] | undefined = retorno?.map((jogador:Jogador) => ({
-      label: jogador.name,
-      value: jogador.name.toLowerCase().replace(/\W/g, '')
-    }))
-    setListaJogadoresCadastrados(retornoAjustadoParaSelect)
+    const retorno:Jogador[] = await listaUsuarios()
+    setListaJogadoresCadastrados(retorno)
+  }
+
+  const reset = () => {
+    setPontuacaoJogador1(0)
+    setPontuacaoJogador2(0)
+    setJogador1(undefined)
+    setJogador2(undefined)
   }
 
   const salvarResultado = async () => {
-    const retorno = await registrarPartida(jogador1, jogador2, pontuacaoJogador1, pontuacaoJogador2)
-    console.log(retorno)
+    if(jogador1 && jogador2 && (pontuacaoJogador1 || pontuacaoJogador2)){
+      const retorno = await registrarPartida(jogador1, jogador2, pontuacaoJogador1, pontuacaoJogador2)
+      console.log(`Partida salva: ${retorno}`)
+    }
+    reset()
   }
 
   useEffect(() => {
@@ -35,10 +41,10 @@ const NovaPartida = () => {
         {
           !!listaJogadoresCadastrados && !!listaJogadoresCadastrados.length &&
           <Select 
-            lista={listaJogadoresCadastrados}
-            setLista={((a:Opcao[])=>setListaJogadoresCadastrados(a))}
+            listaJogadoresCadastrados={listaJogadoresCadastrados}
+            setListaJogadoresCadastrados={((a:Jogador[]) => setListaJogadoresCadastrados(a))}
             valor={jogador1}
-            atualizaValor={(a:Jogador) => setJogador1(a)}
+            setJogador={(a:Jogador) => setJogador1(a)}
           />
         } 
       </div>
@@ -96,10 +102,10 @@ const NovaPartida = () => {
         {
           !!listaJogadoresCadastrados && !!listaJogadoresCadastrados.length &&
           <Select 
-            lista={listaJogadoresCadastrados}
-            setLista={((a:Opcao[])=>setListaJogadoresCadastrados(a))}
+            listaJogadoresCadastrados={listaJogadoresCadastrados}
+            setListaJogadoresCadastrados={((a:Jogador[])=>setListaJogadoresCadastrados(a))}
             valor={jogador2}
-            atualizaValor={(a:Jogador) => setJogador2(a)}
+            setJogador={(a:Jogador) => setJogador2(a)}
           />
         }
       </div>

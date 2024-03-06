@@ -2,30 +2,48 @@
 import { useState } from "react"
 import CreatableSelect from "react-select/creatable"
 import { Jogador, Opcao } from "../../../types"
-import { salvarJogador } from "../../../service/service"
-
-const criarOpcao = (label: string) => ({
-  label,
-  value: label.toLowerCase().replace(/\W/g, ''),
-})
+import { listaUsuarios, salvarJogador } from "../../../service/service"
 
 interface SelectProps{
-  lista: any;
-  setLista: any;
+  listaJogadoresCadastrados: Jogador[];
+  setListaJogadoresCadastrados: any;
   valor: Jogador | undefined;
-  atualizaValor: any;
+  setJogador: any;
 }
 
 const Select = (props:SelectProps) => {
   const [carregando, setCarregando] = useState<boolean>(false)
 
-  const tratarCriacao = (valorInput: string) => {
+  const converterJogadorParaOpcao = (jogador:Jogador) => {
+    return {
+      value: jogador.id.toString(), 
+      label: jogador.name
+    }
+  }
+  const converterOpcaoParaJogador = (opcao:Opcao) => {
+    if(!opcao){
+      return undefined
+    }
+    return {
+      id: Number(opcao.value), 
+      name: opcao.label
+    }
+  }
+
+  const tratarCriacao = async (valorInput: string) => {
     setCarregando(true)
-    const novaOpcao = criarOpcao(valorInput)
-    props.setLista((prev:Opcao[]) => prev ? [...prev, novaOpcao] : [novaOpcao])
+
+    const novoJogador:Jogador[] = await salvarJogador(valorInput)
+    const retorno:Jogador[] = await listaUsuarios()
+
+    console.log(novoJogador)
+    console.log(retorno)
+    
+    props.setListaJogadoresCadastrados(retorno)
+    console.log(props.listaJogadoresCadastrados)
+    props.setJogador(novoJogador[0])
+
     setCarregando(false)
-    props.atualizaValor(novaOpcao)
-    salvarJogador(novaOpcao.label)
   };
 
   return (
@@ -33,10 +51,10 @@ const Select = (props:SelectProps) => {
       isClearable
       isDisabled={carregando}
       isLoading={carregando}
-      onChange={(novoValor) => props.atualizaValor(novoValor)}
+      onChange={(n:any) => props.setJogador(converterOpcaoParaJogador(n))}
       onCreateOption={tratarCriacao}
-      options={props.lista}
-      value={props.valor}
+      options={props.listaJogadoresCadastrados.map((jogador:Jogador) => converterJogadorParaOpcao(jogador))}
+      value={props.valor ? converterJogadorParaOpcao(props.valor) : undefined}
       menuPlacement="auto"
       unstyled
       placeholder='Selecione o Jogador'
