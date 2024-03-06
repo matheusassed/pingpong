@@ -1,8 +1,9 @@
 export interface Jogador{
+  id: number;
   name: string;
 }
 
 export interface Opcao {
-  readonly label: string;
-  readonly value: string;
+  label: string;
+  value: string;
 }
