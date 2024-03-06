@@ -69,11 +69,13 @@ $lightRed: #F2A391;
 
       .controle{
         flex-grow: 1;
-        font-size: 6em;
-        line-height: 1em;
         cursor: pointer;
         -webkit-user-select: none;
         user-select: none;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
         &:first-child{
           color: $lightBlue;

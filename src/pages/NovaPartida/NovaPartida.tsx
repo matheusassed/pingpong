@@ -3,6 +3,7 @@ import styles from './NovaPartida.module.scss'
 import { listaUsuarios, registrarPartida } from '../../service/service'
 import { Jogador } from '../../types'
 import Select from './components/Select'
+import { FaMinus, FaPlus } from "react-icons/fa";
 
 const NovaPartida = () => {
   const [listaJogadoresCadastrados, setListaJogadoresCadastrados] = useState<Jogador[]>()
@@ -59,13 +60,13 @@ const NovaPartida = () => {
               className={ styles.controle }
               onClick={() => setPontuacaoJogador1(pontuacaoJogador1+1)}
             >
-              +
+              <FaPlus color='#F2EFEB' size='2em' />
             </div>
             <div 
               className={ styles.controle }
               onClick={() => pontuacaoJogador1 > 0 ? setPontuacaoJogador1(pontuacaoJogador1-1) : setPontuacaoJogador1(0)}
             >
-              -
+              <FaMinus color='#F2A391' size='2em' />
             </div>
           </div>
         </div>
@@ -86,13 +87,13 @@ const NovaPartida = () => {
               className={ styles.controle }
               onClick={() => setPontuacaoJogador2(pontuacaoJogador2+1)}
             >
-              +
+              <FaPlus color='#F2EFEB' size='2em' />
             </div>
             <div 
               className={ styles.controle }
               onClick={() => pontuacaoJogador2 > 0 ? setPontuacaoJogador2(pontuacaoJogador2-1) : setPontuacaoJogador2(0)}
             >
-              -
+              <FaMinus color='#F2A391' size='2em' />
             </div>
           </div>
         </div>
