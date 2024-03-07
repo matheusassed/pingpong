@@ -40,13 +40,3 @@ h1 {
   line-height: 1.1;
   margin: 0;
 }
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #1C3640;
-    background-color: #F2EFEB;
-  }
-  a:hover {
-    color: #BF1F1F;
-  }
-}
