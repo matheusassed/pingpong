@@ -7,7 +7,7 @@ import { listaUsuarios, salvarJogador } from "../service/service"
 interface SelectProps{
   listaJogadoresCadastrados: Jogador[];
   setListaJogadoresCadastrados: any;
-  valor: Jogador | undefined;
+  valor: Jogador | null;
   setJogador: any;
 }
 
@@ -32,17 +32,10 @@ const Select = (props:SelectProps) => {
 
   const tratarCriacao = async (valorInput: string) => {
     setCarregando(true)
-
     const novoJogador:Jogador[] = await salvarJogador(valorInput)
     const retorno:Jogador[] = await listaUsuarios()
-
-    console.log(novoJogador)
-    console.log(retorno)
-    
     props.setListaJogadoresCadastrados(retorno)
-    console.log(props.listaJogadoresCadastrados)
     props.setJogador(novoJogador[0])
-
     setCarregando(false)
   };
 
@@ -54,7 +47,7 @@ const Select = (props:SelectProps) => {
       onChange={(n:any) => props.setJogador(converterOpcaoParaJogador(n))}
       onCreateOption={tratarCriacao}
       options={props.listaJogadoresCadastrados.map((jogador:Jogador) => converterJogadorParaOpcao(jogador))}
-      value={props.valor ? converterJogadorParaOpcao(props.valor) : undefined}
+      value={props.valor ? converterJogadorParaOpcao(props.valor) : null}
       menuPlacement="auto"
       unstyled
       placeholder='Selecione o Jogador'
