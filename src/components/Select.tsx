@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react"
 import CreatableSelect from "react-select/creatable"
-import { Jogador, Opcao } from "../../../types"
-import { listaUsuarios, salvarJogador } from "../../../service/service"
+import { Jogador, Opcao } from "../types"
+import { listaUsuarios, salvarJogador } from "../service/service"
 
 interface SelectProps{
   listaJogadoresCadastrados: Jogador[];
