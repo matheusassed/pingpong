@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import styles from './NovaPartida.module.scss'
 import { listaUsuarios, registrarPartida } from '../../service/service'
 import { Jogador } from '../../types'
-import Select from './components/Select'
+import Select from '../../components/Select'
 import { FaMinus, FaPlus } from "react-icons/fa";
 
 const NovaPartida = () => {
