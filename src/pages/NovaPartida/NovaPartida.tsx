@@ -4,8 +4,8 @@ import { listaUsuarios, registrarPartida } from '../../service/service'
 import { Jogador } from '../../types'
 import Select from '../../components/Select'
 import { FaMinus, FaPlus } from "react-icons/fa";
-import CircularProgress from '@mui/material/CircularProgress';
-import { Alert, Stack } from '@mui/material'
+import { Alert } from '@mui/material'
+import Loading from '../../components/Loading'
 
 const NovaPartida = () => {
   const [loading, setLoading] = useState<boolean>(true)
@@ -63,16 +63,7 @@ const NovaPartida = () => {
     }
     {
       loading ? 
-      <div className={ styles.loading }>
-        <Stack 
-          sx={{color: '#F2EFEB'}}
-          direction="row"
-          justifyContent="center"
-          alignItems="center"
-        >
-          <CircularProgress color='inherit' size='4em' />
-        </Stack>
-      </div>
+      <Loading />
       :
       <section className={ styles.novaPartida }>
         <div className={ styles.nomeJogador }>
