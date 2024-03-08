@@ -10,6 +10,7 @@
           "font-synthesis"
         ]
       }
-    ]
+    ],
+    "no-inline-styles": "off"
   }
 }
