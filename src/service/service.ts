@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createClient } from '@supabase/supabase-js'
 import { Jogador } from '../types'
 const supabaseUrl:string = import.meta.env.VITE_BASE_URL
@@ -43,4 +44,32 @@ export const registrarPartida = async (jogador1?:Jogador, jogador2?:Jogador, pon
     return data
   }
   throw new Error(`Dados não foram informados corretamente`);
+}
+
+export const getMatches = async () => {
+  const { data: matches, error } = await supabase
+    .from('matches')
+    .select(`*`)
+  
+  if(error)
+    throw new Error(`Erro: ${error}`)
+
+  const players = await listaUsuarios()
+
+  const matchesWithPlayersName = matches.map((match:any) => {
+    const player1Name = players.filter((player:any) => player.id === match.player1_id)
+    const player2Name = players.filter((player:any) => player.id === match.player2_id)
+    return {
+      id: match.id,
+      player1_id: match.player1_id,
+      player1_points: match.player1_points,
+      player1_name: player1Name[0].name,
+      player2_id: match.player2_id,
+      player2_points: match.player2_points,
+      player2_name: player2Name[0].name,
+      data: new Date(match.data).toLocaleDateString('pt-BR')
+    }
+  })
+
+  return matchesWithPlayersName
 }
