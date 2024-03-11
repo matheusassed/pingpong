@@ -50,6 +50,7 @@ export const getMatches = async () => {
   const { data: matches, error } = await supabase
     .from('matches')
     .select(`*`)
+    .order('id', {ascending:false})
   
   if(error)
     throw new Error(`Erro: ${error}`)
