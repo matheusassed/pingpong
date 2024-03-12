@@ -46,11 +46,12 @@ export const registrarPartida = async (jogador1?:Jogador, jogador2?:Jogador, pon
   throw new Error(`Dados não foram informados corretamente`);
 }
 
-export const getMatches = async () => {
+export const getMatches = async (inicio:number, fim:number) => {
   const { data: matches, error } = await supabase
     .from('matches')
     .select(`*`)
     .order('id', {ascending:false})
+    .range(inicio, fim)
   
   if(error)
     throw new Error(`Erro: ${error}`)
