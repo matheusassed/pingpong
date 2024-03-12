@@ -6,9 +6,7 @@
   align-items: center;
   padding: 1em 3em;
   box-sizing: border-box;
-  border-radius: 16px;
-  background: rgba(242, 239, 235, 0.15);
-  border-radius: 16px;
+  border-radius: 4px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   -webkit-backdrop-filter: blur(8.6px);
   backdrop-filter: blur(8.6px);
@@ -18,6 +16,29 @@
               0 40 80 0 rgba(0, 0, 0, 0.1);
   width: 100%;
   aspect-ratio: 16/7;
+  background: url('../../assets/fundo-azul.jpg') no-repeat;
+  background-size: cover;
+  background-position: center;
+  border: 2px solid #FFF;
+  position: relative;
+
+  &::after{
+    content: '';
+    display: block;
+    position: absolute;
+    width: 2px;
+    height: 100%;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(255, 255, 255, 0.4);
+    z-index: 0;
+  }
+
+  *{
+    position: relative;
+    z-index: 1;
+  }
 
   .playerData{
     display: flex;
@@ -29,6 +50,12 @@
       display: block;
       max-width: 100%;
       text-align: center;
+      font-size: 1.4em;
+      width: 120px;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .points{
@@ -48,6 +75,7 @@
 
     .date{
       text-align: center;
+      font-size: 1.2em;
     }
   }
 }

@@ -18,7 +18,7 @@ const HistoricMatch = (props:Props) => {
       
       <div className={ styles.dateContainer }>
         <span className={ styles.date }>{new Date(matchData.data).toLocaleDateString('pt-BR')}</span>
-        <ImCross />
+        <ImCross size='2em' color="#ff8114" />
       </div>
       
       <div className={ styles.playerData }>
